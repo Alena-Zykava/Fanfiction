@@ -2,7 +2,7 @@ import axios from 'axios';
 import { urlServer } from '../constants/constants';
 
 export const httpUsersTable = axios.create({
-  baseURL: `${urlServer}auth/`,
+  baseURL: `${urlServer}`,
   headers: {
       'Content-type': 'application/json'
   }

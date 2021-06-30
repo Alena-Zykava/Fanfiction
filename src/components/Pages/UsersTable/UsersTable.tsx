@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState, MouseEvent, Dispatch, SetStateAction, useContext } from 'react';
 import { Container, Row, Col, Table, Form } from 'react-bootstrap';
 
-import UserItems from '../UserItems';
-import Toolbar from '../Toolbar';
-import { deleteUser, getUsers, updateUser } from '../../utilities/service';
-import { IUser } from '../../models/User';
-import PersonAccount from '../PersonAccount';
-import { AuthContext } from '../../context/AuthContext';
+import UserItems from '../../UserItems';
+import Toolbar from '../../Toolbar';
+import { deleteUser, getUsers, updateUser } from '../../../utilities/service';
+import { IUser } from '../../../models/User';
+import PersonAccount from '../../PersonAccount';
+import { AuthContext } from '../../../context/AuthContext';
 
 const getUsersData = (setUsers: Dispatch<SetStateAction<IUser[]>>, auth: any ) => {
     const { token, logout } = auth;
