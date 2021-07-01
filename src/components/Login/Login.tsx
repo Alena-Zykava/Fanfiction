@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, MouseEvent } from 'react';
+import React, { FC, useContext, useState, MouseEvent, ChangeEvent } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ const Login: FC = () => {
     const { userName, password } = userData;
     const auth = useContext(AuthContext);
 
-    const handleChange = (e: { target: { name: string, value: string } }) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUserData((s) => {
             return {
                 ...s,
@@ -68,7 +68,7 @@ const Login: FC = () => {
                         </Button>
                         <Form.Text className="text-muted">
                             Don't you have an account? 
-                            <Link to="/"> Sing Up</Link>
+                            <Link to="/singup"> Sing Up</Link>
                         </Form.Text>
                     </Form>
                 </Col>

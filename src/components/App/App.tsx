@@ -11,51 +11,57 @@ import Header from '../Header';
 import Fanfiction from '../Pages/Fanfiction';
 import { useAuth } from '../../hooks/useAuth.hook';
 import { AuthContext } from '../../context/AuthContext';
+import FanficPage from '../Pages/FanficPage';
 
 
 
 function App() {
     const { login, logout, token, userId, userName } = useAuth();
     const isAuthenticated = !!token;
+    console.log(isAuthenticated);
 
     return (
         <AuthContext.Provider value={{
             login, logout, token, userId, userName, isAuthenticated 
-        }}>
-            <Container>
-                <Row className='m-3'>
-                    <Header />
-                </Row>                
-                <Router>
+        }}>            
+            <Router>
+                <Container>
+                    <Row className='m-3'>
+                        <Header />
+                    </Row>
+                    <Route path='/' exact>
+                        <Fanfiction />
+                    </Route>
+                    <Route path='/fanfic/:id'>
+                        <FanficPage />
+                    </Route>
+                
                     {!isAuthenticated
                         ? (
                             <>
                                 <Switch>
-                                    <Route path='/login'>
+                                    <Route path='/login' exact>
                                         <Login />
                                     </Route>
-                                    <Route path='/singup'>
+                                    <Route path='/singup' exact>
                                         <SingUp />
                                     </Route>
-                                    <Redirect to='/login' />
+                                    {/* <Redirect to='/' /> */}
                                 </Switch>
                             </>
                         )
-                        : (
+                        : ( 
                             <>
-                                <Switch>
-                                    <Route path='/' exact>
-                                        <Fanfiction />
-                                    </Route>
+                                <Switch>                                    
                                     <Route path='/users' exact>                    
                                         <UsersTable />
                                     </Route>                                
-                                    <Redirect to="/" />
+                                    {/* <Redirect to="/" /> */}
                                 </Switch>       
                             </>
-                        )}                
-                </Router>
-            </Container>            
+                        )}                     
+                </Container>
+            </Router>    
         </AuthContext.Provider>   
   );
 }

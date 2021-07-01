@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
-import FanficItem from '../../Fanfic';
+import FanficItem from '../../FanficItem';
 import Search from '../../Search';
 import { IFanfic } from '../../../models/Fanfic';
 import { getFanfics } from '../../../utilities/service';
@@ -9,6 +10,7 @@ import { Row } from "react-bootstrap";
 const Fanfiction: FC = () => {
 
     const [dataFanfics, setDataFanfics] = useState<IFanfic[]>([]);
+    const history = useHistory();
 
     useEffect(() => {
         console.log('start loader');
@@ -19,6 +21,8 @@ const Fanfiction: FC = () => {
         }).catch((e) => console.log(e));
     }, [])
 
+    
+
     return (
         <>
             <Row>
@@ -26,7 +30,10 @@ const Fanfiction: FC = () => {
             </Row>
             <>
                 {dataFanfics.map((fanfic) => {
-                    return <FanficItem key={fanfic._id} fanfic={ fanfic }/>
+                    return (<FanficItem
+                        handlerClick={(fanfic)=> history.push(`/fanfic/${fanfic._id}`)}
+                        key={fanfic._id}
+                        fanfic={fanfic} />)
                 })}                
                  
             </>
