@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState, MouseEvent, ChangeEvent } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../context/AuthContext';
 import { loginUser } from '../../utilities/service';
@@ -14,6 +14,7 @@ const Login: FC = () => {
     });
     const { userName, password } = userData;
     const auth = useContext(AuthContext);
+    const history = useHistory();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUserData((s) => {
@@ -27,10 +28,11 @@ const Login: FC = () => {
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         loginUser({ userName, password }).then((res) => {
+            console.log(res.data);
             const { accessToken, user} = res.data;
             
             auth.login(accessToken, user.id, user.userName);
-            console.log(accessToken, user.id, user.userName);
+            history.push('/');
         }).catch(() => {
             alert('Error login. User or password is not correct')
         })
