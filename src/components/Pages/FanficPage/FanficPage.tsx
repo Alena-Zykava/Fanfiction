@@ -1,23 +1,29 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { IFanfic } from '../../../models/Fanfic';
 import { getFanfic } from '../../../utilities/service';
+import { setFanficItem } from '../../../store/fanficReducer';
+import { store } from '../../../store';
+
 
 interface IFanficPageParams{
     id: string;
 }
 
+type RootState = ReturnType<typeof store.getState>;
+
 
 const FanficPage: FC = () => {
-    const [dataFanfic, setDataFanfic] = useState<IFanfic | null>(null);
 
-    const params = useParams<IFanficPageParams>();    
+    const params = useParams<IFanficPageParams>();
+    const dispatch = useDispatch();
+    const dataFanfic = useSelector((state: RootState) => state.fanfics.fanficItem)
 
     useEffect(() => {
         getFanfic(params.id).then((res) => {
             const data = res.data;
-            setDataFanfic(data);
+            dispatch(setFanficItem(data));
         }).catch((e) => console.log(e));
     }, [params.id]);
 

@@ -1,23 +1,27 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { Row } from "react-bootstrap";
 
 import FanficItem from '../../FanficItem';
 import Search from '../../Search';
 import { IFanfic } from '../../../models/Fanfic';
 import { getFanfics } from '../../../utilities/service';
-import { Row } from "react-bootstrap";
+import { setFanfics } from '../../../store/fanficReducer';
+import { store } from "../../../store";
+
+type RootState = ReturnType<typeof store.getState>;
 
 const Fanfiction: FC = () => {
 
-    const [dataFanfics, setDataFanfics] = useState<IFanfic[]>([]);
     const history = useHistory();
+    const dispatch = useDispatch();
+    const dataFanfics = useSelector((state: RootState) => state.fanfics.items);
 
     useEffect(() => {
-        console.log('start loader');
         getFanfics().then((res) => {
             const data = res.data;
-            console.log(data);
-            setDataFanfics(data);
+            dispatch(setFanfics(data));
         }).catch((e) => console.log(e));
     }, [])
 
@@ -29,7 +33,7 @@ const Fanfiction: FC = () => {
                 <Search /> 
             </Row>
             <>
-                {dataFanfics.map((fanfic) => {
+                {dataFanfics.map((fanfic: IFanfic) => {
                     return (<FanficItem
                         handlerClick={(fanfic)=> history.push(`/fanfic/${fanfic._id}`)}
                         key={fanfic._id}

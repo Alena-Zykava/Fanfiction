@@ -12,14 +12,15 @@ import Fanfiction from '../Pages/Fanfiction';
 import { useAuth } from '../../hooks/useAuth.hook';
 import { AuthContext } from '../../context/AuthContext';
 import FanficPage from '../Pages/FanficPage';
+import PersonPage from '../Pages/PersonPage';
 
 
 
 function App() {
     const { login, logout, token, userId, userName } = useAuth();
     const isAuthenticated = !!token;
-    console.log(isAuthenticated);
 
+    
     return (
         <AuthContext.Provider value={{
             login, logout, token, userId, userName, isAuthenticated 
@@ -36,9 +37,9 @@ function App() {
                         <FanficPage />
                     </Route>
                 
-                    {!isAuthenticated
+                    {!isAuthenticated 
                         ? (
-                            <>
+                            <>                                
                                 <Switch>
                                     <Route path='/login' exact>
                                         <Login />
@@ -55,7 +56,10 @@ function App() {
                                 <Switch>                                    
                                     <Route path='/users' exact>                    
                                         <UsersTable />
-                                    </Route>                                
+                                    </Route>
+                                    <Route path='/my_page'>
+                                        <PersonPage />
+                                    </Route>
                                     {/* <Redirect to="/" /> */}
                                 </Switch>       
                             </>
