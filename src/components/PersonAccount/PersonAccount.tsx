@@ -11,9 +11,16 @@ const PersonAccount: FC = () => {
     }
 
     return (
-        <Col sm={4} className='d-flex justify-content-between align-items-center'>
-            <i className="bi bi-person-circle" />
-            <span>{ auth.userName }</span>
+        <>
+        <Col className='d-flex justify-content-end align-items-center'>
+            <Link to='/my_page'>
+                <div>
+                    <i className="bi bi-person-circle" />
+                    <span>{ auth.userName }</span>
+                </div>                
+            </Link>
+        </Col>  
+        <Col>
             <Link to='/login'>
                 <Button
                     variant='outline-primary'
@@ -22,6 +29,8 @@ const PersonAccount: FC = () => {
                 </Button>
             </Link>
         </Col>
+        </>    
+       
     )
 }
 

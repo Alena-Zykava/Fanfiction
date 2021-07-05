@@ -4,6 +4,8 @@ import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-d
 import { Container, Row } from 'react-bootstrap';
 
 import './App.scss';
+import "bootswatch/dist/solar/bootstrap.min.css";
+
 import UsersTable from '../Pages/UsersTable';
 import Login from '../Login';
 import SingUp from '../SingUp';
@@ -13,6 +15,8 @@ import { useAuth } from '../../hooks/useAuth.hook';
 import { AuthContext } from '../../context/AuthContext';
 import FanficPage from '../Pages/FanficPage';
 import PersonPage from '../Pages/PersonPage';
+import NewFanficPage from '../Pages/NewFanficPage';
+import UserFanficsPage from '../Pages/UserFanficsPage';
 
 
 
@@ -59,6 +63,12 @@ function App() {
                                     </Route>
                                     <Route path='/my_page'>
                                         <PersonPage />
+                                    </Route>
+                                    <Route path='/add_fanfic'>
+                                        <NewFanficPage />
+                                    </Route>
+                                    <Route path='/my_fanfics'>
+                                        <UserFanficsPage />
                                     </Route>
                                     {/* <Redirect to="/" /> */}
                                 </Switch>       

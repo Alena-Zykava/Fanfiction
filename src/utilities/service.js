@@ -16,3 +16,6 @@ export const getFanfics = (params) => httpFanfic.get('/fanfic/', params);
 
 export const getFanfic = (id) => httpFanfic.get(`/fanfic/${id}`);
 
+export const addNewFanfic = (params) => httpFanfic.post('/fanfic/add', params);
+
+export const getUserFanfics = (userId) => httpFanfic.get(`/fanfic/user/${userId}`);
