@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 import { Button, Col } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import PersonAccount from '../PersonAccount';
 import { AuthContext } from '../../context/AuthContext';
@@ -8,20 +8,29 @@ import { AuthContext } from '../../context/AuthContext';
 
 const Header: FC = () => {
     const history = useHistory();
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext);    
+    const { pathname } = useLocation();
     
-    const handlerClick = () => {
-        history.push('/login');
-    }
+    const PATH_LOGIN = '/login';
+    const isLoginPage = pathname === PATH_LOGIN;
+
     return (
-        <Col className='d-flex justify-content-between'>
-            <a href="/">Logo</a>
-            {isAuthenticated
-                ? <PersonAccount />
-                : <Button onClick={handlerClick}>Войти</Button>}
+        <>
+        <Col sm={7} >
+            <a href="/">Logo</a>           
             
         </Col>       
-
+        {isAuthenticated
+                        ? <PersonAccount />
+                : ( !isLoginPage &&
+                    <Col className="d-flex justify-content-end">
+                        <Button
+                            onClick={() => history.push('/login')}>
+                            Войти
+                        </Button>
+                    </Col>
+                    )}
+            </>
     )
 }
 

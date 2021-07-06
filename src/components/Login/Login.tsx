@@ -10,8 +10,9 @@ const Login: FC = () => {
 
     const [userData, setUserData] = useState({
         userName: '',
-        password:''
+        password: ''
     });
+
     const { userName, password } = userData;
     const auth = useContext(AuthContext);
     const history = useHistory();

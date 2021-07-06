@@ -1,7 +1,7 @@
 
 export interface IFanfic {
     _id: number,
-    idUser: string,
+    userName: string,
     title: string,
     shortDescription: string,
     subtitle: string,
