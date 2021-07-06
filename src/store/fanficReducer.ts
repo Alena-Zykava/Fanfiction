@@ -51,5 +51,5 @@ export default function fanficReducer(state = defaultState, action: IAction) {
 
 
 export const setFanfics = (items: IFanfic[]) => ({ type: SET_FANFICS, payload: items });
-export const setFanficItem = (fanficItem: IFanfic) => ({ type: SET_FANFIC_ITEM, payload: fanficItem });
+export const setFanficItem = (fanficItem: IFanfic | null) => ({ type: SET_FANFIC_ITEM, payload: fanficItem });
 export const setUserFanfics = (items: IFanfic[]) => ({ type: SET_USER_FSNFICS, payload: items });

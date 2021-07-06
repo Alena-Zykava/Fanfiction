@@ -1,40 +1,35 @@
-import React, {FC, useState, ChangeEvent, MouseEvent, useContext, useEffect} from 'react';
+import React, {FC, useState, ChangeEvent, MouseEvent, useContext} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthContext';
+import {useSelector} from "react-redux";
 
+import { AuthContext } from '../../../context/AuthContext';
 import { addNewFanfic, updateFanfic } from '../../../utilities/service';
 import { IFanfic } from '../../../models/Fanfic';
+import { store } from '../../../store';
 
 interface INewFanficProps {
     fanfic?: IFanfic | null
 }
 
-const NewFanficPage:FC<INewFanficProps> = ({fanfic=null}) => {
+type RootState = ReturnType<typeof store.getState>;
 
+const NewFanficPage:FC<INewFanficProps> = () => {
+    const { fanficItem } = useSelector((state: RootState) => state.fanfics);
     const [newFanficData, setNewFanficData] = useState({
-        title: '',
-        shortDescription: '',
-        subtitle: ''
+        title: fanficItem.title || '',
+        shortDescription: fanficItem.shortDescription || '',
+        subtitle: fanficItem.subtitle || '',
     });
     const { userName } = useContext(AuthContext);
     const history = useHistory();
-
-    useEffect(() => {
-        setNewFanficData({
-            title: fanfic?.title || '',
-            shortDescription: fanfic?.shortDescription || '',
-            subtitle: fanfic?.subtitle || ''
-        })
-    },[fanfic])
-    
     const { pathname } = useLocation();
 
     const PATH_ADD_FANFIC = '/add_fanfic';
     const isAddFanfic = pathname === PATH_ADD_FANFIC;
     
     const { title, shortDescription, subtitle } = newFanficData;
-    const id = fanfic?._id;
+    const id = fanficItem?._id;
     console.log(id);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {        
