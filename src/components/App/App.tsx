@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 
 import './App.scss';

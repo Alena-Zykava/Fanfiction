@@ -21,7 +21,7 @@ const Fanfiction: FC = () => {
             const data = res.data;
             dispatch(setFanfics(data));
         }).catch((e) => console.log(e));
-    }, [])
+    }, [dispatch])
 
     
 
