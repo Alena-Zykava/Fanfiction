@@ -1,40 +1,64 @@
-import React, {useState, ChangeEvent, MouseEvent, useContext} from 'react';
+import React, {FC, useState, ChangeEvent, MouseEvent, useContext, useEffect} from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 
-import { addNewFanfic } from '../../../utilities/service';
+import { addNewFanfic, updateFanfic } from '../../../utilities/service';
+import { IFanfic } from '../../../models/Fanfic';
 
-const NewFanficPage = () => {
+interface INewFanficProps {
+    fanfic?: IFanfic | null
+}
+
+const NewFanficPage:FC<INewFanficProps> = ({fanfic=null}) => {
 
     const [newFanficData, setNewFanficData] = useState({
         title: '',
         shortDescription: '',
         subtitle: ''
     });
-    const { userId } = useContext(AuthContext);
+    const { userName } = useContext(AuthContext);
     const history = useHistory();
 
-    const {title, shortDescription, subtitle } = newFanficData;
+    useEffect(() => {
+        setNewFanficData({
+            title: fanfic?.title || '',
+            shortDescription: fanfic?.shortDescription || '',
+            subtitle: fanfic?.subtitle || ''
+        })
+    },[fanfic])
+    
+    const { pathname } = useLocation();
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.name, e.target.value);
+    const PATH_ADD_FANFIC = '/add_fanfic';
+    const isAddFanfic = pathname === PATH_ADD_FANFIC;
+    
+    const { title, shortDescription, subtitle } = newFanficData;
+    const id = fanfic?._id;
+    console.log(id);
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {        
         setNewFanficData((s) => {
             return {
                 ...s,
                 [e.target.name]: e.target.value
             }
         });
-    };
-
-    const lastDataUpdate = new Date().toLocaleDateString();
+    };    
 
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        addNewFanfic({ title, shortDescription, idUser: userId, subtitle, lastDataUpdate }).then((res) => {
-            const { idFanfic } = res.data;
-            history.push(`/fanfic/${idFanfic}`);
-        }).catch((e) => console.log(e));
+        if (!isAddFanfic) {
+            updateFanfic({ title, shortDescription, userName, subtitle, id }).then((res: any) => {
+                const { idFanfic } = res.data;
+                history.push(`/fanfic/${idFanfic}`);
+            }).catch((e) => console.log(e));
+        } else {
+            addNewFanfic({ title, shortDescription, userName, subtitle }).then((res) => {
+                const { idFanfic } = res.data;
+                history.push(`/fanfic/${idFanfic}`);
+            }).catch((e) => console.log(e));
+        };
     }
 
     return (
@@ -82,6 +106,7 @@ const NewFanficPage = () => {
                 onClick={() => history.push('/my_page')}>
                 Отмена
             </Button>
+
         </Form>
     )
 }

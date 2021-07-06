@@ -17,6 +17,7 @@ import FanficPage from '../Pages/FanficPage';
 import PersonPage from '../Pages/PersonPage';
 import NewFanficPage from '../Pages/NewFanficPage';
 import UserFanficsPage from '../Pages/UserFanficsPage';
+import UpdateFanfinc from '../Pages/UpdataFanfic';
 
 
 
@@ -69,6 +70,9 @@ function App() {
                                     </Route>
                                     <Route path='/my_fanfics'>
                                         <UserFanficsPage />
+                                    </Route>
+                                    <Route path='/update_fanfic/:id'>
+                                        <UpdateFanfinc />
                                     </Route>
                                     {/* <Redirect to="/" /> */}
                                 </Switch>       

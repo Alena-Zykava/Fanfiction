@@ -19,3 +19,9 @@ export const getFanfic = (id) => httpFanfic.get(`/fanfic/${id}`);
 export const addNewFanfic = (params) => httpFanfic.post('/fanfic/add', params);
 
 export const getUserFanfics = (userId) => httpFanfic.get(`/fanfic/user/${userId}`);
+
+export const deleteFanfic = (params) => httpFanfic.delete(`/fanfic/delete/${params}`);
+
+export const updateFanfic = (params) => httpFanfic.patch('/fanfic/update', params);
+
+
