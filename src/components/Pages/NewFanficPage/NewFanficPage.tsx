@@ -17,9 +17,9 @@ type RootState = ReturnType<typeof store.getState>;
 const NewFanficPage:FC<INewFanficProps> = () => {
     const { fanficItem } = useSelector((state: RootState) => state.fanfics);
     const [newFanficData, setNewFanficData] = useState({
-        title: fanficItem.title || '',
-        shortDescription: fanficItem.shortDescription || '',
-        subtitle: fanficItem.subtitle || '',
+        title: fanficItem?.title || '',
+        shortDescription: fanficItem?.shortDescription || '',
+        subtitle: fanficItem?.subtitle || '',
     });
     const { userName } = useContext(AuthContext);
     const history = useHistory();
