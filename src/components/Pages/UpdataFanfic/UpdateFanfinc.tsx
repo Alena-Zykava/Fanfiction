@@ -26,15 +26,15 @@ const UpdateFanfinc: FC = () => {
     return (
         <div>
             <h2>Редактированить фанфик</h2>
-            {isFetching ? <Loader /> : (
-                <>
-                    fanficItem && <NewFanficPage />
+            {isFetching ? <Loader /> : (                
+                 fanficItem && <>
+                    <NewFanficPage />
                     <Button
                         onClick={() => handlerClick(fanficItem._id)}
                         variant='warning' >
                         <i className='bi bi-trash-fill'></i>
                     </Button>
-                </>
+                </>                
             )}
             
         </div>
