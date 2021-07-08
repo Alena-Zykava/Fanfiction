@@ -43,7 +43,7 @@ const FanficItem: FC<IFanficItem> = ({ fanfic, handlerClick = ()=> {} }) => {
                             {isUserFanfic && isMyPage &&
                                 <>    
                                 <Button
-                                    variant='info'
+                                    variant='secondary'
                                     onClick={()=> history.push(`/update_fanfic/${fanfic._id}`)}>
                                         <i className='bi bi-gear-fill'></i>
                                 </Button>

@@ -1,9 +1,11 @@
 import React, { FC, useContext, useState, MouseEvent, ChangeEvent } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import { Link, useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../context/AuthContext';
+import { setShowMessage } from '../../store/messageReducer';
 import { loginUser } from '../../utilities/service';
   
 const Login: FC = () => {
@@ -15,7 +17,8 @@ const Login: FC = () => {
 
     const { userName, password } = userData;
     const auth = useContext(AuthContext);
-    const history = useHistory();
+    const history = useHistory(); 
+    const dispatch = useDispatch();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUserData((s) => {
@@ -35,7 +38,8 @@ const Login: FC = () => {
             auth.login(accessToken, user.id, user.userName);
             history.push('/');
         }).catch(() => {
-            alert('Error login. User or password is not correct')
+            dispatch(setShowMessage('ошибка логина'));
+            //alert('Error login. User or password is not correct')
         })
     };
 
