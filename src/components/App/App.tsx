@@ -5,7 +5,7 @@ import { Container, Row } from 'react-bootstrap';
 
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootswatch/dist/solar/bootstrap.min.css";
+//import "bootswatch/dist/solar/bootstrap.min.css";
 
 import UsersTable from '../Pages/UsersTable';
 import Login from '../Login';
@@ -21,20 +21,26 @@ import UserFanficsPage from '../Pages/UserFanficsPage';
 import UpdateFanfinc from '../Pages/UpdataFanfic';
 import Message from '../Message';
 
+import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
+
+const themes = {
+  light: "https://bootswatch.com/5/spacelab/bootstrap.min.css",
+  dark: "https://bootswatch.com/5/solar/bootstrap.min.css",
+};
 
 
 function App() {
     const { login, logout, token, userId, userName } = useAuth();
     const isAuthenticated = !!token;
-
     
     return (
         <AuthContext.Provider value={{
             login, logout, token, userId, userName, isAuthenticated 
-        }}>            
-            <Router>
+        }}>
+            <ThemeSwitcherProvider defaultTheme="dark" themeMap={themes}>
+                <Router>
                 <Container>
-                    <Row className='m-3'>
+                    <Row className='mt-3 mb-3 align-items-center'>
                         <Header />
                     </Row>
                     <Row>
@@ -85,6 +91,7 @@ function App() {
                         )}                     
                 </Container>
             </Router>    
+            </ThemeSwitcherProvider>            
         </AuthContext.Provider>   
   );
 }
