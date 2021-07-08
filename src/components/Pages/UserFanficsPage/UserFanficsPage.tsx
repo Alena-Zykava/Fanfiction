@@ -15,14 +15,14 @@ const UserFanficsPage = () => {
     }
 
     return (
-        <div>
+        <>
             {dataUserFanfics.map((fanfic: IFanfic) => {
                 return (<FanficItem
                         handlerClick={handlerClick}
                         key={fanfic._id}
                         fanfic={fanfic} />)
                 })}
-        </div>
+        </>
     )
 }
 

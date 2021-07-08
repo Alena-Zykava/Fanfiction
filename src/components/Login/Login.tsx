@@ -37,8 +37,9 @@ const Login: FC = () => {
             
             auth.login(accessToken, user.id, user.userName);
             history.push('/');
-        }).catch(() => {
-            dispatch(setShowMessage('ошибка логина'));
+        }).catch((e) => {
+            console.log(e)
+            dispatch(setShowMessage('Не верный логин или пароль! Проверьте подтверждение email или введенные данные'));
             //alert('Error login. User or password is not correct')
         })
     };

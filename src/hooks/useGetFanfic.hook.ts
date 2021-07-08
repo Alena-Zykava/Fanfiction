@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { getFanfic } from '../utilities/service';
-import { setFanficItem } from '../store/fanficReducer';
+import { setFanficItem, setIsFetching } from '../store/fanficReducer';
+import { setShowMessage } from '../store/messageReducer';
 
 interface IFanficPageParams{
     id: string;
@@ -16,11 +17,13 @@ export const useGetFanfic = () => {
     useEffect(() => {
         const updateFanfic = async () => {
             try {
+                dispatch(setIsFetching(true));
                 const { data } = await getFanfic(params.id);
-
                 dispatch(setFanficItem(data));
-            } catch (error) {
-                console.error(error)
+                dispatch(setIsFetching(false));
+            } catch (e) {
+                console.log(e);
+                dispatch(setShowMessage('Проблема с загрузкой данных. Повторите позже'));
             }
         }
 

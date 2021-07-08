@@ -4,6 +4,8 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 import { registration } from '../../utilities/service';
+import { useDispatch } from 'react-redux';
+import { setShowMessage } from '../../store/messageReducer';
 
 
 const SingUp: FC = () => {
@@ -14,6 +16,7 @@ const SingUp: FC = () => {
         password:''
     });    
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const { userName, password, email } = userData;
 
@@ -26,12 +29,14 @@ const SingUp: FC = () => {
             password,
             email,
             dataRegistration: today,
-            lastLoginData: today,
             status: true
         }).then((res) => {
+            dispatch(setShowMessage('Проверьте email. Перейдите по ссылке в письме и подтвердите его'));
             history.push('/login');
-        }).catch(() => {
-            alert('Error! A user with the same name already exists');
+        }).catch((e) => {
+            console.log(e);
+            dispatch(setShowMessage('Ошибка регистрации! Проверьте данные'));
+            // alert('Error! A user with the same name already exists');
         })
         
     }

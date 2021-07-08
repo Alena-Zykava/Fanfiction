@@ -2,7 +2,6 @@ import React, { FC, useContext } from 'react';
 import { Button, ButtonGroup, Card, Row, Col } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-//import removeFanfic from '../../function/removeFanfic';
 
 import { IFanfic } from '../../models/Fanfic';
 

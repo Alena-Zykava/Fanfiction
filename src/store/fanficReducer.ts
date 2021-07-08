@@ -5,6 +5,7 @@ const SET_FANFICS = 'SET_FANFICS';
 const SET_FANFIC_ITEM = 'SET_FANFIC_ITEM';
 const SET_USER_FANFICS = 'SET_USER_FANFICS';
 const SET_SEARCH_INFO = 'SET_SEARCH_INFO';
+const SET_IS_FETCHING = 'SET_IS_FETCHING';
 
 interface IDefaultState {
     items: IFanfic[],
@@ -52,6 +53,12 @@ export default function fanficReducer(state = defaultState, action: IAction) {
                 ...state,
                 searchInfo: action.payload
             }
+        
+        case SET_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.payload
+            }
     
         default:
             return state;
@@ -63,4 +70,5 @@ export const setFanfics = (items: IFanfic[]) => ({ type: SET_FANFICS, payload: i
 export const setFanficItem = (fanficItem: IFanfic | null) => ({ type: SET_FANFIC_ITEM, payload: fanficItem });
 export const setUserFanfics = (items: IFanfic[]) => ({ type: SET_USER_FANFICS, payload: items });
 export const setSearchInfo = (searchFanfics: string) => ({ type: SET_SEARCH_INFO, payload: searchFanfics });
+export const setIsFetching = (isFetching: boolean) => ({ type: SET_IS_FETCHING, payload: isFetching });
 

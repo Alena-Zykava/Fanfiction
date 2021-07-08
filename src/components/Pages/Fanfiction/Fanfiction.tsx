@@ -6,22 +6,23 @@ import FanficItem from '../../FanficItem';
 import Search from '../../Search';
 import { IFanfic } from '../../../models/Fanfic';
 import { getFanfics } from '../../../utilities/service';
-import { setFanfics, setSearchInfo } from '../../../store/fanficReducer';
+import { setFanfics, setSearchInfo, setIsFetching } from '../../../store/fanficReducer';
 import { store } from "../../../store";
+import Loader from "../../Loader";
 
 type RootState = ReturnType<typeof store.getState>;
 
 const Fanfiction: FC = () => {
 
     const dispatch = useDispatch();
-    const dataFanfics = useSelector((state: RootState) => state.fanfics.items);
-    const { searchInfo } = useSelector((state: RootState) => state.fanfics);
-
+    const { items: dataFanfics, searchInfo, isFetching } = useSelector((state: RootState) => state.fanfics);
 
     useEffect(() => {
+        dispatch(setIsFetching(true));
         getFanfics().then((res) => {
             const data = res.data;
             dispatch(setFanfics(data));
+            dispatch(setIsFetching(false));
         }).catch((e) => console.log(e));
     }, [dispatch])
 
@@ -34,6 +35,8 @@ const Fanfiction: FC = () => {
                     <Search />
                 </Col>                
             </Row>
+            {isFetching &&
+                <Loader />}
             <>
                 {searchFanfic.map((fanfic: IFanfic) => {
                     return (<FanficItem                        

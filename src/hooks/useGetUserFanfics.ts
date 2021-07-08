@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../context/AuthContext";
 import { store } from "../store";
 import { setUserFanfics } from "../store/fanficReducer";
+import { setShowMessage } from "../store/messageReducer";
 import { getUserFanfics } from "../utilities/service";
 
 type RootState = ReturnType<typeof store.getState>;
@@ -13,11 +14,14 @@ export const useGetUserFanfics = () => {
     const dispatch = useDispatch();
     const dataUserFanfics = useSelector((state: RootState) => state.fanfics.userFanfics);
     
-    const setDataUserFanfics = useCallback(() => {
+    const setDataUserFanfics = useCallback(() => {        
         getUserFanfics(userName).then((res) => {
             const data = res.data;
             dispatch(setUserFanfics(data));
-        }).catch((e) => console.log(e))
+        }).catch((e) => {
+            console.log(e);
+            dispatch(setShowMessage('Проблема с загрузкой данных. Повторите позже'));
+        })
     }, [dispatch, userName])
     
     useEffect(() => {

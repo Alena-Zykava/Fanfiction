@@ -7,17 +7,15 @@ import NewFanficPage from '../NewFanficPage';
 import { useGetFanfic } from '../../../hooks/useGetFanfic.hook';
 import {deleteFanfic} from '../../../utilities/service';
 import { store } from '../../../store';
+import Loader from '../../Loader';
 
 type RootState = ReturnType<typeof store.getState>;
 
 const UpdateFanfinc: FC = () => {
     const history = useHistory();
-    const { fanficItem } = useSelector((state: RootState) => state.fanfics);
-    
-    console.log(fanficItem);
+    const { fanficItem, isFetching } = useSelector((state: RootState) => state.fanfics);   
 
-    useGetFanfic();
-    
+    useGetFanfic();    
 
     const handlerClick = (id: any) => {
         deleteFanfic( id ).then((res) => {
@@ -28,12 +26,17 @@ const UpdateFanfinc: FC = () => {
     return (
         <div>
             <h2>Редактированить фанфик</h2>
-            {fanficItem && <NewFanficPage />}
-            <Button
-                onClick={() => handlerClick(fanficItem._id)}
-                variant='warning' >
-                <i className='bi bi-trash-fill'></i>
-            </Button>
+            {isFetching ? <Loader /> : (
+                <>
+                    fanficItem && <NewFanficPage />
+                    <Button
+                        onClick={() => handlerClick(fanficItem._id)}
+                        variant='warning' >
+                        <i className='bi bi-trash-fill'></i>
+                    </Button>
+                </>
+            )}
+            
         </div>
     )
 }

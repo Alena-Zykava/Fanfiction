@@ -1,12 +1,13 @@
 import React, {FC, useState, ChangeEvent, MouseEvent, useContext} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 
 import { AuthContext } from '../../../context/AuthContext';
 import { addNewFanfic, updateFanfic } from '../../../utilities/service';
 import { IFanfic } from '../../../models/Fanfic';
 import { store } from '../../../store';
+import { setShowMessage } from '../../../store/messageReducer';
 
 interface INewFanficProps {
     fanfic?: IFanfic | null
@@ -24,13 +25,13 @@ const NewFanficPage:FC<INewFanficProps> = () => {
     const { userName } = useContext(AuthContext);
     const history = useHistory();
     const { pathname } = useLocation();
+    const dispatch = useDispatch();
 
     const PATH_ADD_FANFIC = '/add_fanfic';
     const isAddFanfic = pathname === PATH_ADD_FANFIC;
     
     const { title, shortDescription, subtitle } = newFanficData;
     const id = fanficItem?._id;
-    console.log(id);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {        
         setNewFanficData((s) => {
@@ -52,7 +53,10 @@ const NewFanficPage:FC<INewFanficProps> = () => {
             addNewFanfic({ title, shortDescription, userName, subtitle }).then((res) => {
                 const { idFanfic } = res.data;
                 history.push(`/fanfic/${idFanfic}`);
-            }).catch((e) => console.log(e));
+            }).catch((e) => {
+                console.log(e);
+                dispatch(setShowMessage('Проверьте данные!'))
+            });
         };
     }
 
