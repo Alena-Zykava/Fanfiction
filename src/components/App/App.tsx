@@ -19,6 +19,7 @@ import PersonPage from '../Pages/PersonPage';
 import NewFanficPage from '../Pages/NewFanficPage';
 import UserFanficsPage from '../Pages/UserFanficsPage';
 import UpdateFanfinc from '../Pages/UpdataFanfic';
+import Message from '../Message';
 
 
 
@@ -35,6 +36,9 @@ function App() {
                 <Container>
                     <Row className='m-3'>
                         <Header />
+                    </Row>
+                    <Row>
+                        <Message />
                     </Row>
                     <Route path='/' exact>
                         <Fanfiction />

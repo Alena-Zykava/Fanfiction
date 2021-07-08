@@ -15,7 +15,7 @@ const PersonAccount: FC = () => {
         <Col className='d-flex justify-content-end align-items-center'>
             <Link to='/my_page'>
                 <div>
-                    <i className="bi bi-person-circle" />
+                    <i className="bi bi-person-circle m-3" />
                     <span>{ auth.userName }</span>
                 </div>                
             </Link>
