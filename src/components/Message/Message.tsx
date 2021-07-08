@@ -19,7 +19,7 @@ const Message = () => {
         return () => {
             dispatch(setShowMessage(null));
         }
-    })
+    }, [dispatch]);
 
 
     return (

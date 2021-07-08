@@ -1,1 +1,1 @@
-export const urlServer = 'http://localhost:5000/'
+export const urlServer = 'https://fanfic-back.herokuapp.com/'
