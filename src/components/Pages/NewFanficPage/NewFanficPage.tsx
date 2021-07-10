@@ -8,6 +8,7 @@ import { addNewFanfic, updateFanfic } from '../../../utilities/service';
 import { IFanfic } from '../../../models/Fanfic';
 import { store } from '../../../store';
 import { setShowMessage } from '../../../store/messageReducer';
+import UploadPicture from '../../UploadPicture';
 
 interface INewFanficProps {
     fanfic?: IFanfic | null
@@ -22,6 +23,8 @@ const NewFanficPage:FC<INewFanficProps> = () => {
         shortDescription: fanficItem?.shortDescription || '',
         subtitle: fanficItem?.subtitle || '',
     });
+    const [imageUrl, setImageUrl] = useState(fanficItem?.image || '');
+
     const { userName } = useContext(AuthContext);
     const history = useHistory();
     const { pathname } = useLocation();
@@ -45,12 +48,12 @@ const NewFanficPage:FC<INewFanficProps> = () => {
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!isAddFanfic) {
-            updateFanfic({ title, shortDescription, userName, subtitle, id }).then((res: any) => {
+            updateFanfic({ title, shortDescription, userName, subtitle, id, image: imageUrl }).then((res: any) => {
                 const { idFanfic } = res.data;
                 history.push(`/fanfic/${idFanfic}`);
             }).catch((e) => console.log(e));
         } else {
-            addNewFanfic({ title, shortDescription, userName, subtitle }).then((res) => {
+            addNewFanfic({ title, shortDescription, userName, subtitle, image: imageUrl }).then((res) => {
                 const { idFanfic } = res.data;
                 history.push(`/fanfic/${idFanfic}`);
             }).catch((e) => {
@@ -93,6 +96,9 @@ const NewFanficPage:FC<INewFanficProps> = () => {
                     onChange={handleChange}
                 />
             </Form.Group>
+
+            <UploadPicture imageUrl={imageUrl} setImageUrl={ setImageUrl }/>
+
             <Button
                 variant='success'
                 type='submit'
