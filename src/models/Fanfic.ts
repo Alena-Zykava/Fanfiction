@@ -5,5 +5,6 @@ export interface IFanfic {
     title: string,
     shortDescription: string,
     subtitle: string,
+    image: string,
     lastDataUpdate: string    
 }

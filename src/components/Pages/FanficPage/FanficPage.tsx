@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Image } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useGetFanfic } from '../../../hooks/useGetFanfic.hook';
 import { store } from '../../../store';
@@ -27,6 +27,11 @@ const FanficPage: FC = () => {
                         <Col>
                             <h4>Краткое описание:</h4>
                             <div>{ fanficItem?.shortDescription}</div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Image src={fanficItem?.image} fluid rounded />                            
                         </Col>
                     </Row>
                     <Row>
