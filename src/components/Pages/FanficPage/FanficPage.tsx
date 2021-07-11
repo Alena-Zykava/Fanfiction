@@ -47,7 +47,7 @@ const FanficPage: FC = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Последняя дата обновления: { fanficItem?.lastDataUpdate}</h4>
+                            <h4>Последняя дата обновления: { new Date(fanficItem?.lastDataUpdate).toLocaleString()}</h4>
                         </Col>
                     </Row>
                 </>

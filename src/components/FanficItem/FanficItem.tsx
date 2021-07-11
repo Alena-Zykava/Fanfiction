@@ -18,6 +18,9 @@ const FanficItem: FC<IFanficItem> = ({ fanfic, handlerClick = ()=> {} }) => {
     
     const PATH_MY_PAGE = '/my_page';
     const isMyPage = pathname === PATH_MY_PAGE;
+
+     
+   
     
     return (
         <Row>
@@ -51,9 +54,10 @@ const FanficItem: FC<IFanficItem> = ({ fanfic, handlerClick = ()=> {} }) => {
                                 </Button>
                                 </>
                             }                            
-                        </ButtonGroup>                        
+                        </ButtonGroup>                       
 
                     </Card.Body>
+                    <span className="badge">{new Date(fanfic.lastDataUpdate).toLocaleString()}</span>
                 </Card>
             </Col>            
         </Row>

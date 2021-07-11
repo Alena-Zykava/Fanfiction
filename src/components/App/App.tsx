@@ -5,7 +5,6 @@ import { Container, Row } from 'react-bootstrap';
 
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import "bootswatch/dist/solar/bootstrap.min.css";
 
 import UsersTable from '../Pages/UsersTable';
 import Login from '../Login';
