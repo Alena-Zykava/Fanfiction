@@ -3,9 +3,8 @@ import { Container, Row, Col, Table, Form } from 'react-bootstrap';
 
 import UserItems from '../../UserItems';
 import Toolbar from '../../Toolbar';
-import { deleteUser, getUsers, updateUser } from '../../../utilities/service';
+import { deleteUser, getUsers, updateUserStatus, updateUserRoles } from '../../../utilities/service';
 import { IUser } from '../../../models/User';
-import PersonAccount from '../../PersonAccount';
 import { AuthContext } from '../../../context/AuthContext';
 
 const getUsersData = (setUsers: Dispatch<SetStateAction<IUser[]>>, auth: any ) => {
@@ -51,7 +50,18 @@ const UsersTable: FC = () => {
      ) => {
         e.preventDefault();
         const usersName = getChangeUsersName();        
-        updateUser( {usersName, status} ).then((res) => {            
+        updateUserStatus( {usersName, status} ).then((res) => {            
+            getUsersData(setUsers, auth);
+        })
+    }
+
+    const onUpdateRoles = (
+        e: MouseEvent<HTMLButtonElement>,
+        roles: string[]
+     ) => {
+        e.preventDefault();
+        const usersName = getChangeUsersName();        
+        updateUserRoles( {usersName, roles} ).then((res) => {            
             getUsersData(setUsers, auth);
         })
     }
@@ -63,8 +73,7 @@ const UsersTable: FC = () => {
     return (
         <Container className='p-3'>
             <Row className='p-3 d-flex justify-content-between'>
-                <Toolbar onDeleteUser={onDeleteUser} onBlockUser={onBlockUser} />
-                <PersonAccount />
+                <Toolbar onDeleteUser={onDeleteUser} onBlockUser={onBlockUser} onUpdateRoles={ onUpdateRoles}/>
             </Row>            
             <Row>
                 <Col>
@@ -77,10 +86,10 @@ const UsersTable: FC = () => {
                                         onChange={handlerCheckbox} />
                                 </th>
                                 <th>#</th>
-                                <th>Username</th>
+                                <th>Имя пользователя</th>
                                 <th>Email</th>
-                                <th>Data registration</th>
-                                <th>Last login date</th>
+                                <th>Дата регистрации</th>
+                                <th>Роли</th>
                                 <th>Status</th>
                             </tr>
                         </thead>                        

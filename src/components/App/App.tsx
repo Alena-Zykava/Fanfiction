@@ -21,6 +21,7 @@ import UpdateFanfinc from '../Pages/UpdataFanfic';
 import Message from '../Message';
 
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
+import Administration from '../Pages/Administration';
 
 const themes = {
   light: "https://bootswatch.com/5/spacelab/bootstrap.min.css",
@@ -29,12 +30,14 @@ const themes = {
 
 
 function App() {
-    const { login, logout, token, userId, userName } = useAuth();
+    const { login, logout, token, userId, userName, userRoles } = useAuth();
     const isAuthenticated = !!token;
+    const isAdmin = userRoles?.indexOf('ADMIN') !== -1;
+    console.log(isAdmin);
     
     return (
         <AuthContext.Provider value={{
-            login, logout, token, userId, userName, isAuthenticated 
+            login, logout, token, userId, userName, isAuthenticated, isAdmin
         }}>
             <ThemeSwitcherProvider defaultTheme="dark" themeMap={themes}>
                 <Router>
@@ -87,7 +90,12 @@ function App() {
                                     {/* <Redirect to="/" /> */}
                                 </Switch>       
                             </>
-                        )}                     
+                            )}
+                    {isAdmin &&
+                            <Route path='/administration'>
+                                <Administration />
+                            </Route>
+                   }
                 </Container>
             </Router>    
             </ThemeSwitcherProvider>            

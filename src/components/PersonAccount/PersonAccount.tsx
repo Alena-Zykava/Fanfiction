@@ -25,7 +25,7 @@ const PersonAccount: FC = () => {
                 <Button
                     variant='outline-primary'
                     onClick={onLogOut}>
-                    Log out
+                    Выйти
                 </Button>
             </Link>
         </Col>

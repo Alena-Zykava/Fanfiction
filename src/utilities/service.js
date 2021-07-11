@@ -6,7 +6,9 @@ export const registration = (params) => httpFanfic.post('auth/registration', par
 
 export const deleteUser = (params) => httpFanfic.post('auth/delete', params);
 
-export const updateUser = (params) => httpFanfic.post('auth/update', params);
+export const updateUserStatus = (params) => httpFanfic.post('auth/update_status', params);
+
+export const updateUserRoles = (params) => httpFanfic.post('auth/update_roles', params);
 
 export const loginUser = (params) => httpFanfic.post('auth/login', params);
 

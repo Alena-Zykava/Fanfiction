@@ -37,7 +37,7 @@ const UserItem: FC<IUserState> = ({ user, index, allChecked }) => {
             <td>{ user.userName }</td>
             <td>{ user.email }</td>
             <td>{ user.dataRegistration }</td>
-            <td>{ user.lastLoginData }</td>
+            <td>{ user.roles }</td>
             <td>{ user.status ? 'unblock' : 'block' }</td>
         </tr>                
     )

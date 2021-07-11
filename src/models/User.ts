@@ -4,8 +4,8 @@ export interface IUser {
     userName: string,
     password: string,
     email: string,
-    dataRegistration: string,
-    lastLoginData: string,
+    dataRegistration: string,    
     status: boolean,
+    roles: string[],
     checked: boolean
 }

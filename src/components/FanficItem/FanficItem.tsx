@@ -18,9 +18,6 @@ const FanficItem: FC<IFanficItem> = ({ fanfic, handlerClick = ()=> {} }) => {
     
     const PATH_MY_PAGE = '/my_page';
     const isMyPage = pathname === PATH_MY_PAGE;
-
-     
-   
     
     return (
         <Row>

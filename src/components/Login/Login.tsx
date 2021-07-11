@@ -31,16 +31,13 @@ const Login: FC = () => {
 
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        loginUser({ userName, password }).then((res) => {
-            console.log(res.data);
-            const { accessToken, user} = res.data;
-            
-            auth.login(accessToken, user.id, user.userName);
+        loginUser({ userName, password }).then((res) => {            
+            const { accessToken, user } = res.data;            
+            auth.login(accessToken, user.id, user.userName, user.roles);
             history.push('/');
         }).catch((e) => {
-            console.log(e)
-            dispatch(setShowMessage('Не верный логин или пароль! Проверьте подтверждение email или введенные данные'));
-            //alert('Error login. User or password is not correct')
+            console.log(e);
+            dispatch(setShowMessage('Не верный логин или пароль! Проверьте подтверждение email или введенные данные. Или обратитесь в тех поддержку'));
         })
     };
 

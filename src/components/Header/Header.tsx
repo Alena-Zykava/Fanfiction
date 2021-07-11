@@ -17,7 +17,8 @@ const Header: FC = () => {
     const { pathname } = useLocation();
     
     const PATH_LOGIN = '/login';
-    const isLoginPage = pathname === PATH_LOGIN;
+    const PATH_SINGUP = '/singup';
+    const isLoginPage = pathname === PATH_LOGIN || pathname === PATH_SINGUP;
 
     const { switcher, themes, currentTheme } = useThemeSwitcher();
 
