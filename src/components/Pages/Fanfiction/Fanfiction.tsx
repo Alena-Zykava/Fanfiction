@@ -9,6 +9,7 @@ import { getFanfics } from '../../../utilities/service';
 import { setFanfics, setSearchInfo, setIsFetching } from '../../../store/fanficReducer';
 import { store } from "../../../store";
 import Loader from "../../Loader";
+import { setShowMessage } from "../../../store/messageReducer";
 
 type RootState = ReturnType<typeof store.getState>;
 
@@ -25,7 +26,11 @@ const Fanfiction: FC = () => {
             dispatch(setFanfics(data));
             console.log(data);
             dispatch(setIsFetching(false));
-        }).catch((e) => console.log(e));
+        }).catch((e) => {
+            console.log(e);
+            dispatch(setIsFetching(false));
+            dispatch(setShowMessage('Ошибка загрузки. Повторите позже.'));
+        });
     }, [dispatch])
 
     const searchFanfic = dataFanfics.sort((a: IFanfic, b: IFanfic) => {       

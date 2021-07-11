@@ -4,10 +4,12 @@ interface IAuthContext {
     token: null | string,
     userId: null | string,
     userName: null | string,
+    isAdmin: boolean,
     login: (
         jwtToken: string,
         id: string,
-        name: string
+        name: string,
+        roles: string[]
     ) => void,
     logout: ()=> void,
     isAuthenticated: false

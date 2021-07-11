@@ -14,9 +14,8 @@ const PersonPage = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className='d-flex justify-content-end'>
-                    <ButtonGroup
-                        className='pb-3'
+                <Col className='d-flex justify-content-between pb-3'>
+                    <ButtonGroup                        
                         onClick={() => history.push('/add_fanfic')}>
                         <Button variant='outline-success'>
                             <i className='bi bi-plus-lg'/>
@@ -25,6 +24,13 @@ const PersonPage = () => {
                             Добавить фанфик 
                         </Button>
                     </ButtonGroup>
+
+                    <Button
+                        variant='secondary'
+                        onClick={() => history.push('/administration')}
+                    >
+                            Администрирование
+                        </Button>
                     
                 </Col>
             </Row>
