@@ -16,12 +16,14 @@ const UserFanficsPage = () => {
 
     return (
         <>
-            {dataUserFanfics.map((fanfic: IFanfic) => {
-                return (<FanficItem
+            {dataUserFanfics.sort((a: IFanfic, b: IFanfic) => {       
+                    return a.lastDataUpdate > b.lastDataUpdate ? -1 : 1;
+                }).map((fanfic: IFanfic) => {
+                    return (<FanficItem
                         handlerClick={handlerClick}
                         key={fanfic._id}
                         fanfic={fanfic} />)
-                })}
+            })}
         </>
     )
 }

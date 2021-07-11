@@ -19,14 +19,18 @@ const Fanfiction: FC = () => {
 
     useEffect(() => {
         dispatch(setIsFetching(true));
+        console.log("data");
         getFanfics().then((res) => {
             const data = res.data;
             dispatch(setFanfics(data));
+            console.log(data);
             dispatch(setIsFetching(false));
         }).catch((e) => console.log(e));
     }, [dispatch])
 
-    const searchFanfic = dataFanfics.filter((fanfic: IFanfic) => fanfic.title.toUpperCase().indexOf(searchInfo.toUpperCase()) !== -1);
+    const searchFanfic = dataFanfics.sort((a: IFanfic, b: IFanfic) => {       
+        return a.lastDataUpdate > b.lastDataUpdate ? -1 : 1;
+    }).filter((fanfic: IFanfic) => fanfic.title.toUpperCase().indexOf(searchInfo.toUpperCase()) !== -1);
 
     return (
         <>
@@ -35,9 +39,10 @@ const Fanfiction: FC = () => {
                     <Search />
                 </Col>                
             </Row>
-            {isFetching &&
-                <Loader />}
-            <>
+            {isFetching ? 
+                <Loader />
+            : (
+                <>
                 {searchFanfic.map((fanfic: IFanfic) => {
                     return (<FanficItem                        
                         key={fanfic._id}
@@ -49,7 +54,10 @@ const Fanfiction: FC = () => {
                         onClick={() => dispatch(setSearchInfo(''))}>
                         Сбросить поиск
                     </Button>}
-            </>
+                </>   
+            )
+                }
+            
         </>
     )
 }
