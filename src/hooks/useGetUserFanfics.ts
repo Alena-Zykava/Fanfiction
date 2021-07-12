@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AuthContext } from "../context/AuthContext";
@@ -13,7 +13,7 @@ export const useGetUserFanfics = () => {
     const dispatch = useDispatch();
     const dataUserFanfics = useSelector((state: RootState) => state.fanfics.userFanfics);
 
-    const setDataUserFanfics = () => {
+    const setDataUserFanfics = useCallback(() => {
             dispatch(setIsFetching(true));
             getUserFanfics(userName).then((res) => {
                 const data = res.data;
@@ -24,11 +24,11 @@ export const useGetUserFanfics = () => {
                 dispatch(setIsFetching(false));
                 dispatch(setShowMessage('Проблема с загрузкой данных. Повторите позже'));
             })
-    }
+    },[dispatch, userName])
     
     useEffect(() => {          
         setDataUserFanfics();        
-    },[])
+    },[setDataUserFanfics])
     
     
     return { dataUserFanfics, setDataUserFanfics }
