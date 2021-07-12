@@ -1,46 +1,27 @@
-import React, { FC, useEffect, useState, MouseEvent, Dispatch, SetStateAction, useContext } from 'react';
+import React, { FC, useState, MouseEvent } from 'react';
 import { Container, Row, Col, Table, Form } from 'react-bootstrap';
 
 import UserItems from '../../UserItems';
 import Toolbar from '../../Toolbar';
-import { deleteUser, getUsers, updateUserStatus, updateUserRoles } from '../../../utilities/service';
+import { deleteUser, updateUserStatus, updateUserRoles } from '../../../utilities/service';
 import { IUser } from '../../../models/User';
-import { AuthContext } from '../../../context/AuthContext';
-
-const getUsersData = (setUsers: Dispatch<SetStateAction<IUser[]>>, auth: any ) => {
-    const { token, logout } = auth;
-    getUsers(token).then((res) => {
-        const data = res.data.map((user: IUser) => {
-            return {
-                ...user,
-                checked: false
-            }
-        });
-        setUsers(data);
-    }).catch(() => {
-        logout();
-    })
-}
+import { useGetUsers } from '../../../hooks/useGetUsers';
 
 const UsersTable: FC = () => {
-    const [allChecked, setAllChecked] = useState(false);
-    const [users, setUsers] = useState<IUser[]>([]);
-    const auth = useContext(AuthContext);
-       
-    useEffect(() => {        
-        getUsersData(setUsers, auth);
-    }, [auth])
+    const [allChecked, setAllChecked] = useState(false);   
     
-    const getChangeUsersName = () => users.filter((user) => user.checked === true)
-        .map(({ userName }) => {
-            return userName;
-        })
+    const {dataUsers, setDataUsers} = useGetUsers();  
+    
+    const getChangeUsersName = () => dataUsers.filter((user: IUser) => user.checked === true)
+        .map((user: IUser) => {
+            return user.userName;
+    })
 
     const onDeleteUser = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const usersName = getChangeUsersName();
         deleteUser({ usersName }).then((res) => {
-            getUsersData(setUsers, auth);
+            setDataUsers();
         })
     }
 
@@ -51,7 +32,7 @@ const UsersTable: FC = () => {
         e.preventDefault();
         const usersName = getChangeUsersName();        
         updateUserStatus( {usersName, status} ).then((res) => {            
-            getUsersData(setUsers, auth);
+            setDataUsers();
         })
     }
 
@@ -62,7 +43,7 @@ const UsersTable: FC = () => {
         e.preventDefault();
         const usersName = getChangeUsersName();        
         updateUserRoles( {usersName, roles} ).then((res) => {            
-            getUsersData(setUsers, auth);
+            setDataUsers();
         })
     }
 
@@ -94,7 +75,7 @@ const UsersTable: FC = () => {
                             </tr>
                         </thead>                        
                         <UserItems
-                            users={users}
+                            users={dataUsers}
                             allChecked={allChecked}
                             />
                     </Table>

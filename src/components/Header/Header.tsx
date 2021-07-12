@@ -22,8 +22,10 @@ const Header: FC = () => {
 
     const { switcher, themes, currentTheme } = useThemeSwitcher();
 
-    const toggleDarkMode = () => {        
-        switcher({ theme: currentTheme ==='dark' ? themes.light : themes.dark });
+    const toggleDarkMode = () => {
+        const anotherTheme = currentTheme === 'dark' ? themes.light : themes.dark;
+        switcher({ theme: anotherTheme });
+        // localStorage.setItem('currentTheme', JSON.stringify(anotherTheme));
     };
 
     return (

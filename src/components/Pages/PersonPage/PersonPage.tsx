@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContext';
 
 import UserFanficsPage from '../UserFanficsPage';
 
 const PersonPage = () => {
     const history = useHistory();
+    const { isAdmin } = useContext(AuthContext);
     return (
         <>
             <Row>
@@ -25,12 +27,13 @@ const PersonPage = () => {
                         </Button>
                     </ButtonGroup>
 
-                    <Button
-                        variant='secondary'
-                        onClick={() => history.push('/administration')}
-                    >
+                    {isAdmin &&
+                        <Button
+                            variant='secondary'
+                            onClick={() => history.push('/administration')}
+                        >
                             Администрирование
-                        </Button>
+                        </Button>}
                     
                 </Col>
             </Row>

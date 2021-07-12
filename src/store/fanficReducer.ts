@@ -1,4 +1,5 @@
 import { IFanfic } from '../models/Fanfic';
+import { IAction } from '../models/Interfaces';
 
 
 const SET_FANFICS = 'SET_FANFICS';
@@ -15,10 +16,6 @@ interface IDefaultState {
     isFetching: boolean
 }
 
-interface IAction {
-    type: string,
-    payload: any
-}
 
 const defaultState: IDefaultState = {
     items: [],

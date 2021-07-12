@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { Button } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -29,11 +29,16 @@ const UpdateFanfinc: FC = () => {
             {isFetching ? <Loader /> : (                
                  fanficItem && <>
                     <NewFanficPage />
-                    <Button
-                        onClick={() => handlerClick(fanficItem._id)}
-                        variant='warning' >
-                        <i className='bi bi-trash-fill'></i>
-                    </Button>
+                    <Row>
+                        <Col className='pb-3'>
+                            <Button
+                                onClick={() => handlerClick(fanficItem._id)}
+                                variant='warning' >
+                                Удалить фанфик
+                            </Button>
+                        </Col>
+                    </Row>
+                    
                 </>                
             )}
             

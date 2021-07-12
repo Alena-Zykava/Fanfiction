@@ -33,16 +33,18 @@ function App() {
     const { login, logout, token, userId, userName, userRoles } = useAuth();
     const isAuthenticated = !!token;
     const isAdmin = userRoles?.indexOf('ADMIN') !== -1;
-    console.log(isAdmin);
+    // const defaultTheme = localStorage.getItem('currentTheme') || 'dark';
+    // console.log(defaultTheme)
+
     
     return (
         <AuthContext.Provider value={{
             login, logout, token, userId, userName, isAuthenticated, isAdmin
         }}>
-            <ThemeSwitcherProvider defaultTheme="dark" themeMap={themes}>
+            <ThemeSwitcherProvider defaultTheme='dark' themeMap={themes}>
                 <Router>
-                <Container>
-                    <Row className='mt-3 mb-3 align-items-center'>
+                <Container className='pb-3 pt-3'>
+                    <Row className='mb-3 align-items-center'>
                         <Header />
                     </Row>
                     <Row>

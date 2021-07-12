@@ -23,6 +23,7 @@ export const useGetFanfic = () => {
                 dispatch(setIsFetching(false));
             } catch (e) {
                 console.log(e);
+                dispatch(setIsFetching(false));
                 dispatch(setShowMessage('Проблема с загрузкой данных. Повторите позже'));
             }
         }
