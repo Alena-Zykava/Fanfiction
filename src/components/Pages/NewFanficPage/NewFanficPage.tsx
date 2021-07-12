@@ -1,5 +1,5 @@
 import React, {FC, useState, ChangeEvent, MouseEvent, useContext} from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import {useSelector, useDispatch} from "react-redux";
 
@@ -96,22 +96,27 @@ const NewFanficPage:FC<INewFanficProps> = () => {
                     onChange={handleChange}
                 />
             </Form.Group>
-
-            <UploadPicture imageUrl={imageUrl} setImageUrl={ setImageUrl }/>
-
-            <Button
-                variant='success'
-                type='submit'
-                onClick={handleSubmit}>
-                Сохранить фанфик
-            </Button>
-            <Button
-                className='ml-3'
-                variant='outline-warning'
-                onClick={() => history.push('/my_page')}>
-                Отмена
-            </Button>
-
+            <Row>
+                <Col className='pb-3'>
+                    <UploadPicture imageUrl={imageUrl} setImageUrl={ setImageUrl }/>
+                </Col>
+            </Row>
+            <Row>
+                <Col className='pb-3'>
+                    <Button
+                        variant='success'
+                        type='submit'
+                        onClick={handleSubmit}>
+                        Сохранить фанфик
+                    </Button>
+                    <Button
+                        className='ml-3'
+                        variant='outline-warning'
+                        onClick={() => history.push('/my_page')}>
+                        Отмена
+                    </Button>
+                </Col>
+            </Row>  
         </Form>
     )
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { FC, MouseEvent, ChangeEvent } from "react";
+import { Button, Form, Image } from 'react-bootstrap';
+import { CLOUD_NAME, UPLOAD_PRESET } from "../../constants/constants";
 
 interface UploadPictureProps {
     imageUrl: string,
@@ -9,10 +11,7 @@ interface UploadPictureProps {
 
 
 const UploadPicture: FC<UploadPictureProps> = ({ imageUrl, setImageUrl }) => {
-    const [inputFile, setInputFile] = useState<File | string>('')
-
-    const cloud_name = "dqpsggdou";
-    const upload_preset = "stg8asgt";
+    const [inputFile, setInputFile] = useState<File | string>('');
 
     const onFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
         e.target.files ? setInputFile(e.target.files[0]) : setInputFile('');
@@ -20,18 +19,15 @@ const UploadPicture: FC<UploadPictureProps> = ({ imageUrl, setImageUrl }) => {
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log('1');
-
         const formData = new FormData();
         formData.append("file", inputFile);
-        formData.append("upload_preset", upload_preset);
+        formData.append("upload_preset", UPLOAD_PRESET);
         const options = {
             method: "POST",
             body: formData,
         };
-        return fetch(`https://api.Cloudinary.com/v1_1/${cloud_name}/image/upload`, options)
-            .then((res) => {
-                console.log(2);
+        return fetch(`https://api.Cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, options)
+            .then((res) => {                
                 return res.json()
             })
         .then((res) => setImageUrl(res.secure_url))
@@ -39,11 +35,13 @@ const UploadPicture: FC<UploadPictureProps> = ({ imageUrl, setImageUrl }) => {
     };
 
     return (
-        <div>
-            <img src={imageUrl} className="app_uploadedImg" alt="" />
-            <input type="file" className="app_uploadInput" onChange={onFileChange} />            
-            <button className="app_uploadButton" onClick={handleClick}>Upload</button>
+        <>
+        <Image src={imageUrl} fluid rounded/>
+        <div className='d-flex align-items-center'>            
+            <Form.File type="file" onChange={onFileChange} />            
+            <Button onClick={handleClick}>Upload</Button>
         </div>
+        </>
     )
 }
 

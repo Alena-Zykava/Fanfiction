@@ -20,20 +20,18 @@ const UserFanficsPage = () => {
 
     return (
         <>
-        {isFetching ?
+            {isFetching ?
             <Loader />
-            : (
-            <>
-            {dataUserFanfics.sort((a: IFanfic, b: IFanfic) => {       
-                    return a.lastDataUpdate > b.lastDataUpdate ? -1 : 1;
-                }).map((fanfic: IFanfic) => {
-                    return (<FanficItem
-                        handlerClick={handlerClick}
-                        key={fanfic._id}
-                        fanfic={fanfic} />)
-            })}
-        </>
-        )}
+            : (<>
+                {dataUserFanfics.sort((a: IFanfic, b: IFanfic) => {       
+                        return a.lastDataUpdate > b.lastDataUpdate ? -1 : 1;
+                    }).map((fanfic: IFanfic) => {
+                        return (<FanficItem
+                            handlerClick={handlerClick}
+                            key={fanfic._id}
+                            fanfic={fanfic} />)
+                })}
+                </>)}
         </>    
     )
 }
