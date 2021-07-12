@@ -4,10 +4,10 @@ import { Row, Col, Button } from "react-bootstrap";
 
 import FanficItem from '../../FanficItem';
 import Search from '../../Search';
+import Loader from "../../Loader";
 import { IFanfic } from '../../../models/Fanfic';
 import { getFanfics } from '../../../utilities/service';
 import { setFanfics, setSearchInfo, setIsFetching } from '../../../store/fanficReducer';
-import Loader from "../../Loader";
 import { setShowMessage } from "../../../store/messageReducer";
 import { RootState } from "../../../models/Interfaces";
 
@@ -20,11 +20,9 @@ const Fanfiction: FC = () => {
 
     useEffect(() => {
         dispatch(setIsFetching(true));
-        console.log("data");
         getFanfics().then((res) => {
             const data = res.data;
             dispatch(setFanfics(data));
-            console.log(data);
             dispatch(setIsFetching(false));
         }).catch((e) => {
             console.log(e);
@@ -60,9 +58,7 @@ const Fanfiction: FC = () => {
                         Сбросить поиск
                     </Button>}
                 </>   
-            )
-                }
-            
+            )}            
         </>
     )
 }

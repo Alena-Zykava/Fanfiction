@@ -8,8 +8,6 @@ interface IToolbar{
 }
 
 const Toolbar: FC<IToolbar> = ({ onDeleteUser, onBlockUser, onUpdateRoles }) => {
-    
-
     return (
         <Col className='d-flex justify-content-between'>
             <Button variant='success' onClick={(e: MouseEvent<HTMLButtonElement>) => onBlockUser(e, true)}>

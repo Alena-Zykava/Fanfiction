@@ -5,6 +5,7 @@ import { Container, Row } from 'react-bootstrap';
 
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 
 import UsersTable from '../Pages/UsersTable';
 import Login from '../Login';
@@ -19,13 +20,12 @@ import NewFanficPage from '../Pages/NewFanficPage';
 import UserFanficsPage from '../Pages/UserFanficsPage';
 import UpdateFanfinc from '../Pages/UpdataFanfic';
 import Message from '../Message';
-
-import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import Administration from '../Pages/Administration';
+import { lightTheme, darkTheme } from '../../constants/constants';
 
 const themes = {
-  light: "https://bootswatch.com/5/spacelab/bootstrap.min.css",
-  dark: "https://bootswatch.com/5/solar/bootstrap.min.css",
+  light: lightTheme,
+  dark: darkTheme,
 };
 
 

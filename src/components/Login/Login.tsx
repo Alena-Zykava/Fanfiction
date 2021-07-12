@@ -43,25 +43,25 @@ const Login: FC = () => {
 
     return (
         <Container>
-            <Row>
-                <Col sm={4}>
+            <Row className='justify-content-center'>
+                <Col sm={4} >
                     <Form>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Your name</Form.Label>
+                            <Form.Label>Ваш логин</Form.Label>
                             <Form.Control
                                 name='userName'
                                 type="text"
-                                placeholder="Your name"
+                                placeholder="Ваш логин"
                                 value={userName}
                                 onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Пароль</Form.Label>
                             <Form.Control
                                 name='password'
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Пароль"
                                 value={password}
                                 onChange={handleChange}/>
                         </Form.Group>
@@ -69,11 +69,11 @@ const Login: FC = () => {
                             variant="primary"
                             type="submit"
                             onClick={handleSubmit}>
-                            Log in
+                            Войти
                         </Button>
                         <Form.Text className="text-muted">
-                            Don't you have an account? 
-                            <Link to="/singup"> Sing Up</Link>
+                            У Вас нет аккаунта? 
+                            <Link to="/singup"> Зарегистрироваться</Link>
                         </Form.Text>
                     </Form>
                 </Col>

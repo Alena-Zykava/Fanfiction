@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthContext';
 
+import { AuthContext } from '../../../context/AuthContext';
 import UserFanficsPage from '../UserFanficsPage';
 
-const PersonPage = () => {
+const PersonPage: FC = () => {
     const history = useHistory();
     const { isAdmin } = useContext(AuthContext);
     return (
@@ -16,10 +16,12 @@ const PersonPage = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className='d-flex justify-content-between pb-3'>
-                    <ButtonGroup                        
+                <Col sm={12} className='d-flex justify-content-between pb-3 flex-wrap'>
+                    <ButtonGroup
+                        className='mt-3'
                         onClick={() => history.push('/add_fanfic')}>
-                        <Button variant='outline-success'>
+                        <Button
+                            variant='outline-success'>
                             <i className='bi bi-plus-lg'/>
                         </Button>
                         <Button variant='success'>      
@@ -29,6 +31,7 @@ const PersonPage = () => {
 
                     {isAdmin &&
                         <Button
+                            className='mt-3'
                             variant='secondary'
                             onClick={() => history.push('/administration')}
                         >

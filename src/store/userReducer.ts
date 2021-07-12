@@ -2,6 +2,7 @@ import { IUser } from '../models/User';
 import { IAction } from '../models/Interfaces';
 
 const SET_USERS = 'SET_USERS';
+const SET_IS_FETCHING_USERS = 'SET_IS_FETCHING_USERS';
 
 interface IDefaultState {
     items: IUser[],    
@@ -21,9 +22,16 @@ export default function userReducer(state = defaultState, action: IAction) {
                 items: action.payload
             };            
            
+        case SET_IS_FETCHING_USERS:
+            return {
+                ...state,
+                isFetching: action.payload
+            };
+        
         default:
             return state;
     }
 }
 
 export const setUsers = (items: IUser[]) => ({ type: SET_USERS, payload: items });
+export const setIsFetchingUsers = (isFetching: boolean) => ({ type: SET_IS_FETCHING_USERS, payload: isFetching });
