@@ -1,15 +1,13 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import NewFanficPage from '../NewFanficPage';
-import { useGetFanfic } from '../../../hooks/useGetFanfic.hook';
-import {deleteFanfic} from '../../../utilities/service';
-import { store } from '../../../store';
 import Loader from '../../Loader';
-
-type RootState = ReturnType<typeof store.getState>;
+import { useGetFanfic } from '../../../hooks/useGetFanfic.hook';
+import { deleteFanfic } from '../../../utilities/service';
+import { RootState } from '../../../models/Interfaces';
 
 const UpdateFanfinc: FC = () => {
     const history = useHistory();
@@ -40,8 +38,7 @@ const UpdateFanfinc: FC = () => {
                     </Row>
                     
                 </>                
-            )}
-            
+            )}            
         </div>
     )
 }

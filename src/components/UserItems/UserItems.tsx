@@ -8,9 +8,8 @@ interface IUserItems {
     allChecked: boolean
 }
 
-const UserItems: FC<IUserItems> = ({users, allChecked}) => {
-
-   
+const UserItems: FC<IUserItems> = ({ users, allChecked }) => {
+    
     const userItems = users.map((user, index) =>
         <UserItem
             key={user._id}

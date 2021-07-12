@@ -1,23 +1,20 @@
 import React, { FC, useContext } from 'react';
 import { Button, Col } from 'react-bootstrap';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useThemeSwitcher } from 'react-css-theme-switcher';
 
 import PersonAccount from '../PersonAccount';
 import { AuthContext } from '../../context/AuthContext';
-import { useThemeSwitcher } from 'react-css-theme-switcher';
+import { PATH_LOGIN, PATH_SINGUP } from '../../constants/constants';
 
 import icon from './icons_day.png';
 import iconLogo from './icons8_book.png';
 
-
-
 const Header: FC = () => {
     const history = useHistory();
     const { isAuthenticated } = useContext(AuthContext);    
-    const { pathname } = useLocation();
+    const { pathname } = useLocation();    
     
-    const PATH_LOGIN = '/login';
-    const PATH_SINGUP = '/singup';
     const isLoginPage = pathname === PATH_LOGIN || pathname === PATH_SINGUP;
 
     const { switcher, themes, currentTheme } = useThemeSwitcher();
@@ -30,7 +27,7 @@ const Header: FC = () => {
 
     return (
         <>
-        <Col sm={7} >
+        <Col >
                 <Link to="/">
                     <img src={iconLogo} alt="Book" />
                 </Link>

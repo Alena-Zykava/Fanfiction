@@ -36,7 +36,6 @@ const SingUp: FC = () => {
         }).catch((e) => {
             console.log(e);
             dispatch(setShowMessage('Ошибка регистрации! Проверьте данные'));
-            // alert('Error! A user with the same name already exists');
         })
         
     }
@@ -52,34 +51,34 @@ const SingUp: FC = () => {
     
     return (
         <Container>
-            <Row>
+            <Row className='justify-content-center'>
                 <Col sm={4}>
                     <Form>
                     <Form.Group >
-                            <Form.Label>Your name</Form.Label>
+                            <Form.Label>Ваш логин</Form.Label>
                             <Form.Control
                                 name='userName'
-                                placeholder="Your name"
+                                placeholder="Ваш логин"
                                 value={userName}
                                 onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
                                 name='email'
                                 type="email"
-                                placeholder="Enter email"
+                                placeholder="Email"
                                 value={email}
                                 onChange={handleChange}/>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Пароль</Form.Label>
                             <Form.Control
                                 name='password'
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Пароль"
                                 value={password}
                                 onChange={handleChange}/>
                         </Form.Group>
@@ -87,11 +86,11 @@ const SingUp: FC = () => {
                             variant="primary"
                             type="submit"
                             onClick={handleSubmit}>
-                            Sing Up
+                            Зарегистрироваться
                         </Button>
                         <Form.Text className="text-muted">
-                            Do you have an account? 
-                            <Link to="/login"> Log In</Link>
+                            У Вас есть аккаунт? 
+                            <Link to="/login"> Войти</Link>
                         </Form.Text>
                     </Form>
                 </Col>

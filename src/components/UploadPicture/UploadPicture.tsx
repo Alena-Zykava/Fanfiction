@@ -8,8 +8,6 @@ interface UploadPictureProps {
     setImageUrl: (imageUrl: string) => void
 }
 
-
-
 const UploadPicture: FC<UploadPictureProps> = ({ imageUrl, setImageUrl }) => {
     const [inputFile, setInputFile] = useState<File | string>('');
 
@@ -26,6 +24,7 @@ const UploadPicture: FC<UploadPictureProps> = ({ imageUrl, setImageUrl }) => {
             method: "POST",
             body: formData,
         };
+        
         return fetch(`https://api.Cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, options)
             .then((res) => {                
                 return res.json()
@@ -36,7 +35,7 @@ const UploadPicture: FC<UploadPictureProps> = ({ imageUrl, setImageUrl }) => {
 
     return (
         <>
-        <Image src={imageUrl} fluid rounded/>
+        <Image className='pb-3' src={imageUrl} fluid rounded/>
         <div className='d-flex align-items-center'>            
             <Form.File type="file" onChange={onFileChange} />            
             <Button onClick={handleClick}>Upload</Button>

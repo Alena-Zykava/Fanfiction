@@ -1,16 +1,17 @@
-import React from 'react';
-import { deleteFanfic } from '../../../utilities/service';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+
 import FanficItem from '../../FanficItem';
+import Loader from '../../Loader';
 import { IFanfic } from '../../../models/Fanfic';
 import { useGetUserFanfics } from '../../../hooks/useGetUserFanfics';
 import { RootState } from '../../../models/Interfaces';
-import { useSelector } from 'react-redux';
-import Loader from '../../Loader';
+import { deleteFanfic } from '../../../utilities/service';
 
-const UserFanficsPage = () => {
+const UserFanficsPage: FC = () => {
 
     const { dataUserFanfics, setDataUserFanfics } = useGetUserFanfics();
-    const {isFetching} = useSelector((state: RootState)=> state.fanfics)
+    const { isFetching } = useSelector((state: RootState) => state.fanfics);
 
     const handlerClick = (id: any) => {
         deleteFanfic(id).then((res) => {

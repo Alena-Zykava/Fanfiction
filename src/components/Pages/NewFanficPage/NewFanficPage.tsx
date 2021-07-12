@@ -1,20 +1,19 @@
 import React, {FC, useState, ChangeEvent, MouseEvent, useContext} from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+import UploadPicture from '../../UploadPicture';
 import { AuthContext } from '../../../context/AuthContext';
 import { addNewFanfic, updateFanfic } from '../../../utilities/service';
 import { IFanfic } from '../../../models/Fanfic';
-import { store } from '../../../store';
 import { setShowMessage } from '../../../store/messageReducer';
-import UploadPicture from '../../UploadPicture';
+import { PATH_ADD_FANFIC } from '../../../constants/constants';
+import { RootState } from '../../../models/Interfaces';
 
 interface INewFanficProps {
     fanfic?: IFanfic | null
 }
-
-type RootState = ReturnType<typeof store.getState>;
 
 const NewFanficPage:FC<INewFanficProps> = () => {
     const { fanficItem } = useSelector((state: RootState) => state.fanfics);
@@ -29,8 +28,7 @@ const NewFanficPage:FC<INewFanficProps> = () => {
     const history = useHistory();
     const { pathname } = useLocation();
     const dispatch = useDispatch();
-
-    const PATH_ADD_FANFIC = '/add_fanfic';
+    
     const isAddFanfic = pathname === PATH_ADD_FANFIC;
     
     const { title, shortDescription, subtitle } = newFanficData;

@@ -2,12 +2,10 @@ import React, { FC } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useGetFanfic } from '../../../hooks/useGetFanfic.hook';
-import { store } from '../../../store';
+import { RootState } from '../../../models/Interfaces';
 import Loader from '../../Loader';
 
 import './fanficPage.css';
-
-type RootState = ReturnType<typeof store.getState>;
 
 const FanficPage: FC = () => {
 
@@ -51,9 +49,8 @@ const FanficPage: FC = () => {
                         </Col>
                     </Row>
                 </>
-            )}
-            
-            </> 
+            )}            
+        </> 
     )
 }
 
