@@ -25,7 +25,7 @@ const Header: FC = () => {
     const toggleDarkMode = () => {
         const anotherTheme = currentTheme === 'dark' ? themes.light : themes.dark;
         switcher({ theme: anotherTheme });
-        // localStorage.setItem('currentTheme', JSON.stringify(anotherTheme));
+        localStorage.setItem('currentTheme', anotherTheme);
     };
 
     return (
@@ -50,8 +50,7 @@ const Header: FC = () => {
                 <Button variant='secondary' onClick={toggleDarkMode}>
                     <img src={icon} alt="Icon" />
                 </Button>
-            </Col>
-        
+            </Col>        
         </>
     )
 }
