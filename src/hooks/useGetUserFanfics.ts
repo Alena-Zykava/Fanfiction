@@ -2,12 +2,11 @@ import { useCallback, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AuthContext } from "../context/AuthContext";
-import { store } from "../store";
 import { setUserFanfics } from "../store/fanficReducer";
 import { setShowMessage } from "../store/messageReducer";
 import { getUserFanfics } from "../utilities/service";
+import { RootState } from '../models/Interfaces';
 
-type RootState = ReturnType<typeof store.getState>;
 
 export const useGetUserFanfics = () => {
     const { userName } = useContext(AuthContext);
